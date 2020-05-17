@@ -68,27 +68,25 @@ const Login = ({ dispatch, isLoading, errorMessage }) => {
     }
     return (
         <div className="App">
-            <header className="App-header">
-                {isLoading && <div className="loading">
-                    <MoonLoader
-                        size={60}
-                        loading
-                    />
-                </div>}
-                <div className="box">
-                    <label>Account ID</label>
-                    <input name="accountID" placeholder="Please enter account ID" value={accountId} onChange={(event) => handleChange(event)} />
-                    {accountIdError.length > 0 &&
-                        <label className='error'>{accountIdError}</label>}
-                    <label>Password</label>
-                    <input name="password" placeholder="Please enter password" type="password" value={password} onChange={(event) => handleChange(event)} />
-                    {passwordError.length > 0 &&
-                        <label className='error'>{passwordError}</label>}
-                    <button onClick={() => callAPI()}>Click</button>
-                    {responseError.length > 0 &&
-                        <label style={{ marginTop: '20px' }} className='error'>{responseError}</label>}
-                </div>
-            </header>
+            {isLoading && <div className="loading">
+                <MoonLoader
+                    size={60}
+                    loading
+                />
+            </div>}
+            <div className="box">
+                <label>Account ID</label>
+                <input name="accountID" placeholder="Please enter account ID" value={accountId} onChange={(event) => handleChange(event)} />
+                {accountIdError.length > 0 &&
+                    <label className='error'>{accountIdError}</label>}
+                <label>Password</label>
+                <input name="password" placeholder="Please enter password" type="password" value={password} onChange={(event) => handleChange(event)} />
+                {passwordError.length > 0 &&
+                    <label className='error'>{passwordError}</label>}
+                <button onClick={() => callAPI()}>Click</button>
+                {responseError.length > 0 &&
+                    <label style={{ marginTop: '20px' }} className='error'>{responseError}</label>}
+            </div>
         </div>
     );
 }
