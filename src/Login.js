@@ -4,13 +4,6 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { connect } from 'react-redux'
 import { performLogin } from './redux/actions'
 
-// message: "You got the token!"
-// token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7fSwiZXhwIjoxNTg5NjI2NzI1LCJpYXQiOjE1ODk2MjU4MjV9.4KJKErmIFu2F7VVUoGA5PROYrXZCoAGMBVrMuGF9o-g"
-
-
-// error_message: "user dosent exist"
-
-
 const Login = ({ dispatch, isLoading, token, errorMessage }) => {
 
     const [accountId, setAccountID] = React.useState('');
@@ -94,7 +87,7 @@ const Login = ({ dispatch, isLoading, token, errorMessage }) => {
                         <label className='error'>{passwordError}</label>}
                     <button onClick={() => callAPI()}>Click</button>
                     {responseError.length > 0 &&
-                        <label className='error'>{responseError}</label>}
+                        <label style={{ marginTop: '20px' }} className='error'>{responseError}</label>}
                 </div>
             </header>
         </div>
