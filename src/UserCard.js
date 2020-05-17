@@ -2,17 +2,13 @@ import React from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
 
-const UserCard = () => {
-    const userList = [
-        { "accountId": "anna", "age": 21, "firstName": "Anna", "lastName": "Cheng" },
-        { "accountId": "abd", "age": 28, "firstName": "Abd", "lastName": "Cheng" }
-    ];
+const UserCard = (props) => {
+    const { firstName, lastName, age } = props;
+    const fullName = firstName + ' ' + lastName;
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Home</h1>
-                <p>Home page body content</p>
-            </header>
+        <div className="user-card">
+            <span>{fullName}</span>
+            <span>{age}</span>
         </div>
     );
 }
@@ -24,7 +20,9 @@ UserCard.propTypes = {
 }
 
 PropTypes.defaultProps = {
-
+    firstName: '',
+    lastName: '',
+    age: ''
 }
 
-export default home;
+export default UserCard;

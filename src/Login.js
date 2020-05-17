@@ -36,8 +36,6 @@ function Login() {
             case 'password':
                 if (value.length === 0) {
                     setPasswordError('Please enter password');
-                } else if (value.length < 6) {
-                    setPasswordError('Minimum password length is 6 digits');
                 } else {
                     setPasswordError('');
                 }
@@ -48,8 +46,26 @@ function Login() {
         }
     }
 
+    const validateForm = () => {
+        if (accountId.length === 0 && password.length === 0) {
+            setResponseError('Please enter account ID and password.')
+        } else if (accountId.length === 0) {
+            setAccountIDError('Please enter account ID');
+        } else if (password.length === 0) {
+            setPasswordError('Please enter password');
+        } else if (password.length < 6) {
+            setPasswordError('Minimum password length is 6 digits');
+        } else {
+            setResponseError('')
+            setAccountIDError('');
+            setPasswordError('');
+            return true
+        }
+        return false
+    }
+
     const callAPI = () => {
-        if (accountId.length !== 0 && password.length !== 0) {
+        if (validateForm()) {
             setResponseError('');
             console.log("callAPI")
             let resultStatus = 0
@@ -91,8 +107,6 @@ function Login() {
                 .catch(catchError => {
                     console.log("Catch: ", catchError);
                 })
-        } else {
-            setResponseError('Please enter account ID and password.')
         }
     }
     return (

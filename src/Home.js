@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import UserCard from './UserCard'
 
 const Home = () => {
     const userList = [
@@ -9,8 +10,7 @@ const Home = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Home</h1>
-                <p>Home page body content</p>
+                {userList.map(userData => <UserCard firstName={userData.firstName} lastName={userData.lastName} age={userData.age} />)}
             </header>
         </div>
     );
