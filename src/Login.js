@@ -4,7 +4,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { connect } from 'react-redux'
 import { performLogin } from './redux/actions'
 
-const Login = ({ dispatch, isLoading, token, errorMessage }) => {
+const Login = ({ dispatch, isLoading, errorMessage }) => {
 
     const [accountId, setAccountID] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -96,7 +96,6 @@ const Login = ({ dispatch, isLoading, token, errorMessage }) => {
 
 const mapStateToProps = state => ({
     isLoading: state.loginReducer.isLoading,
-    token: state.loginReducer.token,
     errorMessage: state.loginReducer.errorMessage
 })
 
