@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import MoonLoader from "react-spinners/MoonLoader";
+import { connect } from 'react-redux'
+import { performLogin } from './redux/actions'
 
 // message: "You got the token!"
 // token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7fSwiZXhwIjoxNTg5NjI2NzI1LCJpYXQiOjE1ODk2MjU4MjV9.4KJKErmIFu2F7VVUoGA5PROYrXZCoAGMBVrMuGF9o-g"
@@ -9,15 +11,18 @@ import MoonLoader from "react-spinners/MoonLoader";
 // error_message: "user dosent exist"
 
 
-function Login() {
+const Login = ({ dispatch, isLoading, token, errorMessage }) => {
 
     const [accountId, setAccountID] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [loading, setLoading] = React.useState(false);
 
     const [accountIdError, setAccountIDError] = React.useState('');
     const [passwordError, setPasswordError] = React.useState('');
     const [responseError, setResponseError] = React.useState('');
+
+    React.useEffect(() => {
+        setResponseError(errorMessage)
+    }, [errorMessage])
 
     const handleChange = (event) => {
         setResponseError('');
@@ -66,53 +71,13 @@ function Login() {
 
     const callAPI = () => {
         if (validateForm()) {
-            setResponseError('');
-            console.log("callAPI")
-            let resultStatus = 0
-            setLoading(true);
-            fetch("https://apertum-interview.herokuapp.com/api/user/login", {
-                method: 'post',
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "accountId": accountId,
-                    "pswd": password
-                })
-            }).then((response) => {
-                resultStatus = response.status;
-                if (response.status === 200) {
-                    return Promise.resolve(response.json()); // This will end up in SUCCESS part
-                }
-                return Promise.resolve(response.json()).then((responseInJson) => { // This will end up in ERROR part
-                    return Promise.reject(responseInJson.message);
-                });
-            })
-                .then((result) => {
-                    console.log("Success: ", result);
-                    setLoading(false);
-                    if (result.error_message) {
-                        setResponseError(result.error_message);
-                    } else {
-                        window.location.href = '/home'
-                    }
-                }, (error) => {
-                    console.log("Error: ", error);
-                    setLoading(false);
-                    if (resultStatus === 403) {
-                        setResponseError('Invalid username password')
-                    }
-                })
-                .catch(catchError => {
-                    console.log("Catch: ", catchError);
-                })
+            dispatch(performLogin(accountId, password));
         }
     }
     return (
         <div className="App">
             <header className="App-header">
-                {loading && <div className="loading">
+                {isLoading && <div className="loading">
                     <MoonLoader
                         size={60}
                         loading
@@ -136,4 +101,10 @@ function Login() {
     );
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    isLoading: state.loginReducer.isLoading,
+    token: state.loginReducer.token,
+    errorMessage: state.loginReducer.errorMessage
+})
+
+export default connect(mapStateToProps)(Login);

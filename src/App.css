@@ -88,11 +88,13 @@ button:hover {
   color: white;
   background-color: rgba(3, 117, 180, 0.7);
   min-width: 300px;
+  width: 35%;
   min-height: 40px;
   margin: 10px;
   font-size: 14px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   border-radius: 10px;
+  text-align: left;
 }

@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 const UserCard = (props) => {
     const { firstName, lastName, age } = props;
     const fullName = firstName + ' ' + lastName;
+    const userAge = 'age : ' + age;
     return (
-        <div className="user-card">
+        <div className="user-card" key={fullName}>
             <span>{fullName}</span>
-            <span>{age}</span>
+            <span>{userAge}</span>
         </div>
     );
 }
@@ -16,13 +17,13 @@ const UserCard = (props) => {
 UserCard.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    age: PropTypes.string
+    age: PropTypes.number
 }
 
 PropTypes.defaultProps = {
     firstName: '',
     lastName: '',
-    age: ''
+    age: undefined
 }
 
 export default UserCard;
