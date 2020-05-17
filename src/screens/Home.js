@@ -1,9 +1,9 @@
 import React from 'react';
-import UserCard from './UserCard'
+import UserCard from '../components/UserCard'
 import { connect } from 'react-redux'
-import { getUserList, filterUserList } from './redux/actions'
+import { getUserList, filterUserList } from '../redux/actions'
 import MoonLoader from "react-spinners/MoonLoader";
-import RadioButton from './RadioButton'
+import RadioButton from '../components/RadioButton'
 
 const Home = ({ dispatch, isLoading, userList, errorMessage, filteredUserList }) => {
     React.useEffect(() => {

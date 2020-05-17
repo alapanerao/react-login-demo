@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import PropTypes from 'prop-types';
 
 const RadioButton = (props) => {

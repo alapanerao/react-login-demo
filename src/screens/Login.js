@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.css';
 import MoonLoader from "react-spinners/MoonLoader";
 import { connect } from 'react-redux'
-import { performLogin } from './redux/actions'
+import { performLogin } from '../redux/actions'
 
 const Login = ({ dispatch, isLoading, errorMessage }) => {
 
